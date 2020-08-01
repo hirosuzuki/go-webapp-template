@@ -5,11 +5,21 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"text/template"
 )
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 	log.Printf("Request: %s\n", r.URL)
-	fmt.Fprintf(w, "Home")
+	t, err := template.ParseFiles("templates/home.html")
+	if err != nil {
+		log.Printf("%s\n", err.Error())
+		return
+	}
+	w.WriteHeader(200)
+	w.Header().Set("Content-type", "text/html")
+	if t.Execute(w, "Home") != nil {
+		log.Printf("%s\n", err.Error())
+	}
 }
 
 func main() {
