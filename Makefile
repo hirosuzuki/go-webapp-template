@@ -1,11 +1,11 @@
 PORT=8000
 DOCKER_IMAGE_NAME=go-webapp
 
-app: app.go
-	go build -o app
+server: app.go
+	go build -o server
 
 run:
-	PORT=${PORT} ./app
+	PORT=${PORT} ./server
 
 docker-build:
 	sudo docker build . -t ${DOCKER_IMAGE_NAME}
