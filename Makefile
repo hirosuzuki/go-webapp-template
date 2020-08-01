@@ -2,4 +2,4 @@ app: app.go
 	go build -o app
 
 run:
-	./app
+	PORT=8080 ./app
