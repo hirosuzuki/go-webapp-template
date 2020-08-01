@@ -27,6 +27,11 @@ func main() {
 	if port == "" {
 		port = "8080"
 	}
+
+	fs := http.FileServer(http.Dir("./static"))
+	http.Handle("/static/", http.StripPrefix("/static/", fs))
+	http.Handle("/favicon.ico", fs)
+
 	http.HandleFunc("/", homeHandler)
 	log.Printf("Start App: listening on port %s", port)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
